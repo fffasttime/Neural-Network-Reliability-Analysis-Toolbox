@@ -1,3 +1,9 @@
 [submodule "neuron_level_reliability_analysis"]
 	path = neuron_level_reliability_analysis
 	url = https://github.com/fffasttime/MRFI.git
+[submodule "FPGA_based_reliability_emulation_system"]
+	path = FPGA_based_reliability_emulation_system
+	url = https://github.com/ICT-CHASE/fault-analysis-of-FPGA-based-NN-accelerator.git
+[submodule "operation_level_reliability_analysis"]
+	path = operation_level_reliability_analysis
+	url = https://github.com/xuexinghua/Operation-level-FI.git
