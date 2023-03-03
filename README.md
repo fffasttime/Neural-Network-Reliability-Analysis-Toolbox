@@ -1,1 +1,2 @@
-# MR-Neural-Network-Reliability-Analysis-Toolbox
+# Multi-Resolution Neural Network Reliability Analysis Toolbox
+

@@ -1,0 +1,3 @@
+[submodule "neuron_level_reliability_analysis"]
+	path = neuron_level_reliability_analysis
+	url = https://github.com/fffasttime/MRFI.git
