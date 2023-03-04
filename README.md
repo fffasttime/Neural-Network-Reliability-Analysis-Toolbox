@@ -45,10 +45,10 @@ The base idea of statistical model based analysis is observe the statistical tre
 |Statistical model based analysis|Based on statistical trend|Order of magnitude less or even no fault injection experiments|
 
 ## Reference
-Huang, Haitong, Xinghua Xue, Cheng Liu, Ying Wang, Tao Luo, Long Cheng, Huawei Li, and Xiaowei Li. "Statistical Modeling of Soft Error Influence on Neural Networks." arXiv preprint arXiv:2210.05876 (2022).
+[1] Haitong Huang, Xinghua Xue, Cheng Liu, Ying Wang, Tao Luo, Long Cheng, Huawei Li, and Xiaowei Li. "Statistical Modeling of Soft Error Influence on Neural Networks." arXiv preprint arXiv:2210.05876 (2022).
 
-Xinghua Xue, Haitong Huang, Cheng Liu, Ying Wang, Tao Luo, Lei Zhang, "Winograd Convolution: A Perspective from Fault Tolerance", In proceedings of ACM/IEEE Design Automation Conference (DAC), 2022
+[2] Xinghua Xue, Haitong Huang, Cheng Liu, Ying Wang, Tao Luo, Lei Zhang, "Winograd Convolution: A Perspective from Fault Tolerance", In proceedings of ACM/IEEE Design Automation Conference (DAC), 2022
 
-Dawen Xu, Ziyang Zhu, Cheng Liu, Ying Wang, Shuang Zhao, Lei Zhang, Huaguo Liang, Huawei Li, Kwang-Ting Cheng, "Reliability Evaluation and Analysis of FPGA-based Neural Network Acceleration System", IEEE Transactions on Very Large Scale Integration (VLSI) Systems, 2021
+[3] Dawen Xu, Ziyang Zhu, Cheng Liu, Ying Wang, Lei Zhang, Huaguo Liang, Huawei Li, Kwang-Ting Cheng, "Reliability Evaluation and Analysis of FPGA-based Neural Network Acceleration System", IEEE Transactions on Very Large Scale Integration (VLSI) Systems, 2021
 
-Dawen Xu, Ziyang Zhu, Cheng Liu*, Ying Wang, Huawei Li, Lei Zhang, Kwang-Ting Cheng, Persistent Fault Analysis of Neural Networks on FPGA-based Acceleration System, The 31th IEEE International Conference on Application-specific Systems, Architectures and Processors (ASAP), July, 2020
+[4] Dawen Xu, Ziyang Zhu, Cheng Liu, Ying Wang, Huawei Li, Lei Zhang, Kwang-Ting Cheng, Persistent Fault Analysis of Neural Networks on FPGA-based Acceleration System, The 31th IEEE International Conference on Application-specific Systems, Architectures and Processors (ASAP), July, 2020
