@@ -20,22 +20,22 @@ Operation-level fault provides relative accurate hardware error mapping to basic
 
 ### Neuron-level fault injection
 
-Neuron-level error injection assumes that the impact of hardware errors is reflected in neuron values, including weights and activation values, which can be simulated through the neural network training framework (e.g. PyTorch, Tensorflow). In order to obtain a selective fault-tolerant protection design scheme, error injection on neurons can be further divided into several levels:
+Neuron-level error injection assumes that the impact of hardware errors is reflected in neuron values, including weights and activation values, which can be simulated through the neural network training framework (e.g. PyTorch, Tensorflow). In order to obtain a selective fault-tolerant protection design strategies, error injection on neurons can be further divided into several levels:
 
 - Bit level: Distinguish the error of each binary bit.
 - Per neuron: Distinguish the error of neuron value.
 - Channel-wise or kernel-wise: Distinguish the error impact between convolution channels or kernels.
 - Layer-wise or block-wise: Distinguish layers or blocks.
 
-For speed, optimized neuron-level fault injection framework is similar to the normal forward propagation, with a small amount of overhead. However, it is still unrealistic to simulate the difference on millions of fine-graind neurons, so common error injection frameworks focus on coarse-grained analysis. [PyTorchFI](https://github.com/pytorchfi/pytorchfi), [TensorFI](https://github.com/DependableSystemsLab/TensorFI), [Ares](https://github.com/alugupta/ares), etc. are all fault injection tools work on this level. 
+For simulation speed, optimized neuron-level fault injection framework is similar to the normal forward propagation, with a small amount of overhead. However, it is still unrealistic to simulate the difference on millions of fine-graind neurons, so common error injection frameworks focus on coarse-grained analysis. [PyTorchFI](https://github.com/pytorchfi/pytorchfi), [TensorFI](https://github.com/DependableSystemsLab/TensorFI), [Ares](https://github.com/alugupta/ares), etc. are all fault injection tools work on this level. 
 
-Our neuron-level fault injection tool is based on PyTorch. Compare with previous work, our tool can be simply and arbitrarily used as bit-, neuron-, channal- and layerwise- grained fault injector, configure different bit-flip mode and error mode, and can easily add internal observation hook into network. This is beneficial to different experimental needs.
+Our neuron-level fault injection tool is based on PyTorch. Compare with previous work, our tool can be simply and arbitrarily used as bit-, neuron-, channal- and layerwise- grained fault injector, configure different bit-flip mode and error mode, and can easily insert internal observation hook into network. This is beneficial to different experimental needs.
 
 ### Statistical model based analysis
 
-The base idea of statistical model based analysis is observe the statistical trend when errors occur and than propagate on large number of neurons. Although its accuracy is not as good as the error injection experiment, it can quickly get conclusions under different configurations, such as the reliability of the model under different injection rates, quantization methods and protection strategies. This can also provide more insights for fault tolerance analysis, covering factors that have not been considered by the error injection method.
+The base idea of statistical model based analysis is observe the statistical trend when errors occur and propagate on large number of neurons. Although its accuracy is not as good as the error injection experiment, it can quickly get conclusions under different configurations, such as the reliability of the model under different injection rates, quantization methods and protection strategies. This can also provide more insights for fault tolerance analysis, and covering factors that have not been considered by the error injection method.
 
-### Sheet
+### Comparison table
 
 |Method|Feature|Speed|
 |-|-|-|
