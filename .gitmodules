@@ -7,3 +7,6 @@
 [submodule "operation_level_reliability_analysis"]
 	path = operation_level_reliability_analysis
 	url = https://github.com/xuexinghua/Operation-level-FI.git
+[submodule "application_level_analysis_for_autonomous_driving"]
+	path = application_level_analysis_for_autonomous_driving
+	url = https://github.com/fffasttime/CARLA-FI
