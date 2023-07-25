@@ -2,53 +2,47 @@
 
 ## Introduction
 
-Neural network accelerators are increasingly used because of their competitive advantages in performance and energy efficiency. Their reliability is critical to these applications, and must be comprehensively evaluated and verified to ensure application safety.
-
-There are different requirements for the accuracy of reliability analysis at different stages of design. It will be very time-consuming to rely only on the very accurate reliability analysis at the bottom level, and may get biased results due to the limited experimental settings. Simulation at a higher level can provide reliability analysis more quickly and provide more extensive conclusions, but it will bring more inaccuracies because the details of the underlying hardware architecture are not considered. 
-
-Therefore, we provide multi-level fault analysis tools or methods for different scenarios, including **FPGA-based reliability emulation**<sup>[1][2]</sup>, **operation level fault injection**<sup>[3]</sup>, **neuron level fault injection**<sup>[4]</sup> and **statistical model based reliability analysis**<sup>[5]</sup>. We also made **application-oriented fault analysis** for autonomous driving scenarios<sup>[6]</sup>.
+Neural network accelerators are increasingly used because of their competitive advantages in performance and energy efficiency. Their reliability is critical to high-level applications built on top of the accelerators, and must be comprehensively evaluated and verified to ensure application safety. In this case, neural network reliability analysis tools are demanded. While the reliability analysis accuracy and the overhead is always contradictory, we present an neural network reliability analysis toolbox to enable various reliability analysis requirements for the sake of fault-tolerant design at different abstraction levels of neural network applications. Specifically, we provide five different fault analysis tools or methods including **FPGA-based reliability emulation**<sup>[1][2]</sup>, **architecture level fault injection**<sup>[7]</sup> **operation level fault injection**<sup>[3]</sup>, **neuron level fault injection**<sup>[4]</sup>, and **statistical model based reliability analysis**<sup>[5]</sup>. We also made **application-oriented fault analysis** for autonomous driving scenarios<sup>[6]</sup>. Particularly, <sup>[7]</sup> is developed by Prof.Tan's group and please refer to her [homepage](https://jingweijiatan.github.io/) for details. 
 
 ## Compare
 
-### FPGA-based reliability emulation system
+### FPGA-based fault emulation
 
-Hardware level fault injection provides the most accurate fault simulation result, which can be used when accurate fault analysis is required under specific hardware scenarios. The speed is limited by the real hardware execution.
+FPGA-based fault injection developed in <sup>[1]</sup> essentially have neural network accelerator implemented on FPGAs and injects stuck-at faults into the FPGA bitstream through vendor specific fault injection mechanism. It simulates the hardware faults of FPGAs directly and enables accurate fault simulation whenever it is required. The fault simulation is fast and only limited by the FPGAs.
+
+### Architecture-based fault simulation
+The fault simulation in <sub>[7]</sub> is essentially a microarchitecture-level fault injection framework and it can be utilized to analyze the reliability of systolic array based CNN accelerators. Specifically, it is built on top of scacle-sim simulator <sub>[8]</sub>.
 
 ### Operation-level fault injection
 
-Operation-level fault provides relative accurate hardware error mapping to basic value calculation, that is, each data of the multiplication-addition calculation process. It can be used when cost of hardware level simulation is unacceptable. Compare with neuron level fault injection, it is more accurate and can distinguish different operator implementations (e.g normal convolution, winograd convolution and FFT convolution). This level fault simulation usually takes several times to tens of times the normal forward propagation time.
+Operation-level fault injection proposed in <sub>[3]</sub> essentially has bit-flip errors injected to output of primitive operations such addition and multiplication in neural network processing. It reflects the influence of bit flip errors of the underlying computing engines, but it is not bound to any specific computing architectures. Compared to architecture-specific fault injection, it is more general and much faster yet compromised with fault simulation accuracy. Moreover, it also has the non-linear functions and different convolution methods such as winograd taken into consideration, which is more accurate than the widely utilized neural-level fault injection tools with little fault simulation speed penalty. 
 
 ### Neuron-level fault injection
 
-Neuron-level error injection assumes that the impact of hardware errors is reflected in neuron values, including weights and activation values, which can be simulated through the neural network training framework (e.g. PyTorch, Tensorflow). In order to obtain a selective fault-tolerant protection design strategies, error injection on neurons can be further divided into several levels:
+Neuron-level fault injection has random bit flip errors injected to neurons, which is also general and neglects the underlying micro-architecture of the computing engines. This is the most widely used fault injection approach because of the convenient portability and fast fault simulation speed. However, existing neuron-level fault injection tools such as Pytorch-FI [PyTorchFI](https://github.com/pytorchfi/pytorchfi), Tensor-FI [TensorFI](https://github.com/DependableSystemsLab/TensorFI), and [Ares](https://github.com/alugupta/ares) usually only provide coarse-grained reliability analysis such as layer-wise reliability, which is insufficient for in-depth reliability analysis of neural network processing. Worse still, most of the fault injection tools typically have the fault injection mechanism combined with the neural network computing engines i.e. Pytorch, which makes the fault simulation complex across different models and scenarios. To address the above problems, we enable fault reliability analysis at various granularities ranging from bit-level, neuron-level, channal-level, and layer-wise as detailed below. In addition, the error injection mechanism is decoupled with the model processing as much as possible through internal observation hook, which makes the neural network reliability analysis convenient.
 
 - Bit level: Distinguish the error of each binary bit.
 - Per neuron: Distinguish the error of neuron value.
 - Channel-wise or kernel-wise: Distinguish the error impact between convolution channels or kernels.
 - Layer-wise or block-wise: Distinguish layers or blocks.
 
-For simulation speed, optimized neuron-level fault injection framework is similar to the normal forward propagation, with a small amount of overhead. However, it is still unrealistic to simulate the difference on millions of fine-graind neurons, so common error injection frameworks focus on coarse-grained analysis. [PyTorchFI](https://github.com/pytorchfi/pytorchfi), [TensorFI](https://github.com/DependableSystemsLab/TensorFI), [Ares](https://github.com/alugupta/ares), etc. are all fault injection tools work on this level. 
-
-Our neuron-level fault injection tool is based on PyTorch. Compare with previous work, our tool can be simply and arbitrarily used as bit-, neuron-, channal- and layerwise- grained fault injector, configure different bit-flip mode and error mode, and can easily insert internal observation hook into network. This is beneficial to different experimental needs.
-
 ### Statistical model based analysis
 
-The base idea of statistical model based analysis is observe the statistical trend when errors occur and propagate on large number of neurons. Although its accuracy is not as good as the error injection experiment, it can quickly get conclusions under different configurations, such as the reliability of the model under different injection rates, quantization methods and protection strategies. This can also provide more insights for fault tolerance analysis, and covering factors that have not been considered by the error injection method.
+The base idea of statistical model based analysis is to observe the statistical trend when errors occur and propagate on large number of neurons. Although its accuracy is not as good as the error injection experiment, the anaylsis under different configurations such as the reliability of the model under different injection rate, quantization methods, and protection strategies can be obtained rapidly. Moreover, the statistical model based analysis is usually more general compared to fault injection based analysis. 
 
 ### Application-oriented fault analysis
 
-Application oriented fault analysis for specific scenarios, conducting end-to-end analysis. An application oriented fault analysis may be slow or rely on specific simulators, but it can provide a more comprehensive supplementary analysis of the impact of errors on the entire system.
-
-For example, the autopilot system includes not only neural networks, but also multiple processing stages, which may mask or transmit errors. We conducted deep learning acclerator in loop error injection simulation for autopilot system based on CARLA, indicating that fault injection may cause autopilot task failure.
+Instead of performing the reliability analysis on neural network processing, we also investigate the reliability analysis on high-level applications such that the reliability issues can be estimated from the perspective of applications such as autonomous driving tasks, which can provide a more comprehensive analysis of the impact of hardware errors on the entire autonomous system. This is important, because autonomous driving system usually involves multiple processing stages and some of the stages may hide some hardware errors or some minor computing errors may induce critical failure of the autonomous driving tasks. 
 
 ### Comparison table
 
 |Method|Feature|Speed|
 |-|-|-|
-|FPGA-based reliability emulation|Simulate on hardware, accurate on specific hardware|Slow, depend on real hardware|
-|Operation-level fault injection|Fault inject on operation calculation|Several times slower than forward propagation|
-|Neuron-level fault injection|Fault inject on neuron values|Fast as forward propagation on single fault inject|
-|Statistical model based analysis|Based on statistical trend|Order of magnitude less or even no fault injection experiments|
+|FPGA-based reliability emulation|Simulate on hardware, accurate on specific hardware|Slow, depend on specific architecture|
+|Architecture-based fault simulation|Fault injection on cycle-accurate accelerator simulator| Slow, depend on specific architecture|
+|Operation-level fault injection|Fault injection on primitive operations|Fast, independent with specific architecture|
+|Neuron-level fault injection|Fault injection on neurons|Fast, independent with specific architecture|
+|Statistical model based analysis|Based on statistical trend|Orders of magnitude faster, independent with specific architecture|
 
 ## Reference
 
@@ -63,3 +57,7 @@ For example, the autopilot system includes not only neural networks, but also mu
 [5] [Haitong Huang, Xinghua Xue, Cheng Liu, Ying Wang, Tao Luo, Long Cheng, Huawei Li, and Xiaowei Li, "Statistical Modeling of Soft Error Influence on Neural Networks." IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, doi: 10.1109/TCAD.2023.3266405.](https://ieeexplore.ieee.org/document/10098868)
 
 [6] [Haitong Huang, Cheng Liu, "Deep Learning Accelerator in Loop Reliability Evaluation for Autonomous Driving", arXiv preprint arXiv:2306.11759 (2023).](https://arxiv.org/abs/2306.11759)
+
+[7] [Jingweijia Tan, Qixiang Wang, Kaige Yan, Xiaohui Wei, and Xin Fu. "Saca-FI: A microarchitecture-level fault injection framework for reliability analysis of systolic array based CNN accelerator." Future Generation Computer Systems 147 (2023): 251-264.] (https://www.sciencedirect.com/science/article/abs/pii/S0167739X2300184X)
+
+[8] [Samajdar, Ananda, Yuhao Zhu, Paul Whatmough, Matthew Mattina, and Tushar Krishna. "Scale-sim: Systolic cnn accelerator simulator." arXiv preprint arXiv:1811.02883 (2018).] (https://arxiv.org/abs/1811.02883)
