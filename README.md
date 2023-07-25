@@ -40,8 +40,8 @@ Instead of performing the reliability analysis on neural network processing, we 
 |-|-|-|
 |FPGA-based reliability emulation|Simulate on hardware, accurate on specific hardware|Slow, depend on specific architecture|
 |Architecture-level fault simulation|Fault injection on cycle-accurate accelerator simulator| Slow, depend on specific architecture|
-|Operation-level fault injection|Fault injection on primitive operations|Fast, independent with specific architecture|
-|Neuron-level fault injection|Fault injection on neurons|Fast, independent with specific architecture|
+|Operation-level fault simulation|Fault injection on primitive operations|Fast, independent with specific architecture|
+|Neuron-level fault simulation|Fault injection on neurons|Fast, independent with specific architecture|
 |Statistical model based analysis|Based on statistical trend|Orders of magnitude faster, independent with specific architecture|
 
 ## Reference
