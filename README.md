@@ -1,4 +1,4 @@
-# Multi-Resolution Neural Network Reliability Analysis Toolbox
+# Neural Network Reliability Analysis Toolbox
 
 ## Introduction
 
