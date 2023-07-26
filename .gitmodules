@@ -10,3 +10,6 @@
 [submodule "application_level_analysis_for_autonomous_driving"]
 	path = application_level_analysis_for_autonomous_driving
 	url = https://github.com/fffasttime/CARLA-FI
+[submodule "architecture_level_fault_simulation"]
+	path = architecture_level_fault_simulation
+	url = https://github.com/One-B-Tree/Saca-FI-A-microarchitecture-level-fault-injection-framework-for-CNN-accelerator
