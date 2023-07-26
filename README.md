@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Neural network accelerators are increasingly used because of their competitive advantages in performance and energy efficiency. Their reliability is critical to high-level applications built on top of the accelerators, and must be comprehensively evaluated and verified to ensure application safety. In this case, neural network reliability analysis tools are demanded. While the reliability analysis accuracy and the overhead is always contradictory, we present an neural network reliability analysis toolbox to enable various reliability analysis requirements for the sake of fault-tolerant design at different abstraction levels of neural network applications. Specifically, we provide five different fault analysis tools or methods including **FPGA-based fault emulation[1][2]**, **architecture-level fault simulation[7]**, **operation-level fault simulation [3]**, **neuron-level fault simulation[4]**, and **statistical model based reliability analysis[5]**. We also made **application-level fault simulation** for autonomous driving scenarios[6]. Particularly, the architecture level fault simulation in [7] is developed by Prof.Tan's group and please refer to her [homepage](https://jingweijiatan.github.io/) for details. 
+Neural network accelerators are increasingly used because of their competitive advantages in performance and energy efficiency. Their reliability is critical to high-level applications built on top of the accelerators, and must be comprehensively evaluated and verified to ensure application safety. In this case, neural network reliability analysis tools are demanded. While the reliability analysis accuracy and the overhead is always contradictory, we present an neural network reliability analysis toolbox to enable various reliability analysis requirements for the sake of fault-tolerant design at different abstraction levels of neural network applications. Specifically, we provide five different fault analysis tools or methods including **FPGA-based fault emulation[1][2]**, **architecture-level fault simulation[7]**, **operation-level fault simulation [3]**, **neuron-level fault simulation[4]**, and **statistical model based reliability analysis[5]**. We also made **application-level fault simulation** for autonomous driving scenarios[6]. Particularly, the architecture level fault simulation in [7] is developed by Prof.Tan's group and please refer to her [homepage](https://jingweijiatan.github.io/) for more details. 
 
-## Compare
+## Fault Simulation Tools
 
 ### FPGA-based fault emulation
 
@@ -54,7 +54,7 @@ Instead of performing the reliability analysis on neural network processing, we 
 
 [4] [Haitong Huang, Cheng Liu, Xinghua Xue, Ying Wang, Huawei Li, Xiaowei Li, "MRFI: An Open Source Multi-Resolution Fault Injection Framework for Neural Network Processing", arXiv preprint arXiv:2306.11758 (2023).](https://arxiv.org/abs/2306.11758)
 
-[5] [Haitong Huang, Xinghua Xue, Cheng Liu, Ying Wang, Tao Luo, Long Cheng, Huawei Li, and Xiaowei Li, "Statistical Modeling of Soft Error Influence on Neural Networks." IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, doi: 10.1109/TCAD.2023.3266405.](https://ieeexplore.ieee.org/document/10098868)
+[5] [Haitong Huang, Xinghua Xue, Cheng Liu, Ying Wang, Tao Luo, Long Cheng, Huawei Li, and Xiaowei Li, "Statistical Modeling of Soft Error Influence on Neural Networks." IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems, TCAD, 2023.](https://ieeexplore.ieee.org/document/10098868)
 
 [6] [Haitong Huang, Cheng Liu, "Deep Learning Accelerator in Loop Reliability Evaluation for Autonomous Driving", arXiv preprint arXiv:2306.11759 (2023).](https://arxiv.org/abs/2306.11759)
 
